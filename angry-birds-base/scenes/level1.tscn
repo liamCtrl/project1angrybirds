@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=3 uid="uid://dsv54oatgckjp"]
+
+[ext_resource type="Script" path="res://scripts/level1_control.gd" id="1_1khy8"]
+[ext_resource type="Script" path="res://scripts/Fishscript.gd" id="1_nqm2j"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="2_armof"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="3_a40h7"]
+[ext_resource type="Texture2D" uid="uid://bkc78yugcw0qg" path="res://oceanbackground.jpg" id="3_at615"]
+[ext_resource type="PackedScene" uid="uid://d4gp2o8ahkdmp" path="res://scenes/enemy.tscn" id="5_kq2oe"]
+[ext_resource type="Script" path="res://scripts/return_button.gd" id="6_egbld"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="6_llnhc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cox6n"]
+radius = 59.0762
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fjj1"]
+size = Vector2(1182, 41)
+
+[node name="GameController1" type="Node2D"]
+script = ExtResource("1_1khy8")
+enemy_resource = ExtResource("5_kq2oe")
+
+[node name="backgroundSprite2D" type="Sprite2D" parent="."]
+position = Vector2(625, 285)
+scale = Vector2(2.2069, 2.2)
+texture = ExtResource("3_at615")
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(70, 533)
+gravity_scale = 0.0
+script = ExtResource("1_nqm2j")
+
+[node name="FishCollisionShape2D" type="CollisionShape2D" parent="Fish"]
+shape = SubResource("CircleShape2D_cox6n")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_armof")
+
+[node name="enemy" parent="." instance=ExtResource("5_kq2oe")]
+position = Vector2(1477, 282)
+
+[node name="borderZone3" type="StaticBody2D" parent="."]
+position = Vector2(1169, -237)
+rotation = 1.56652
+
+[node name="borderCollisionShape2D" type="CollisionShape2D" parent="borderZone3"]
+position = Vector2(571, 10.5)
+shape = SubResource("RectangleShape2D_0fjj1")
+
+[node name="borderZone2" type="StaticBody2D" parent="."]
+position = Vector2(22, -41)
+
+[node name="borderCollisionShape2D" type="CollisionShape2D" parent="borderZone2"]
+position = Vector2(571, 10.5)
+shape = SubResource("RectangleShape2D_0fjj1")
+
+[node name="borderZone1" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+
+[node name="borderCollisionShape2D" type="CollisionShape2D" parent="borderZone1"]
+position = Vector2(571, 10.5)
+shape = SubResource("RectangleShape2D_0fjj1")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_llnhc")
+
+[node name="scoreLabel" type="Label" parent="UI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="returnButton" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 28.0
+offset_right = 159.0
+offset_bottom = 31.0
+text = "Return to menu
+"
+script = ExtResource("6_egbld")
+
+[node name="Wall" parent="." instance=ExtResource("3_a40h7")]
+position = Vector2(727, 629)
+
+[node name="Wall2" parent="." instance=ExtResource("3_a40h7")]
+position = Vector2(917, 365)
+rotation = 1.5708
+
+[node name="Wall3" parent="." instance=ExtResource("3_a40h7")]
+position = Vector2(1036, 630)
+
+[node name="Wall4" parent="." instance=ExtResource("3_a40h7")]
+position = Vector2(852, 363)
+rotation = -1.5708
+
+[connection signal="pressed" from="UI/returnButton" to="UI/returnButton" method="_on_pressed"]

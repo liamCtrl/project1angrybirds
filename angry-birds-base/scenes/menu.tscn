@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dewyn5as4inkm"]
+
+[ext_resource type="Script" path="res://scripts/StartGame.gd" id="1_5s5pc"]
+[ext_resource type="Texture2D" uid="uid://bkc78yugcw0qg" path="res://oceanbackground.jpg" id="1_gv62v"]
+
+[node name="menu" type="Node2D"]
+
+[node name="backgroundSprite2D" type="Sprite2D" parent="."]
+position = Vector2(625, 285)
+scale = Vector2(2.2069, 2.2)
+texture = ExtResource("1_gv62v")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1162.0
+offset_bottom = 639.0
+
+[node name="titleLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 193.0
+offset_right = 629.0
+offset_bottom = 235.0
+scale = Vector2(2, 2)
+text = "That fish game"
+
+[node name="btnPlay" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 466.0
+offset_top = 313.0
+offset_right = 688.0
+offset_bottom = 371.0
+text = "Begin"
+script = ExtResource("1_5s5pc")
+
+[connection signal="pressed" from="Control/btnPlay" to="Control/btnPlay" method="_on_pressed"]
